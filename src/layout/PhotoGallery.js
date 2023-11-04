@@ -1,32 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Photo from "../components/Photo";
-import img1 from "../assets/images/image-1.webp";
-import img2 from "../assets/images/image-2.webp";
-import img3 from "../assets/images/image-3.webp";
-import img4 from "../assets/images/image-4.webp";
-import img5 from "../assets/images/image-5.webp";
-import img6 from "../assets/images/image-6.webp";
-import img7 from "../assets/images/image-7.webp";
-import img8 from "../assets/images/image-8.webp";
-import img9 from "../assets/images/image-9.webp";
-import img10 from "../assets/images/image-10.jpeg";
-import img11 from "../assets/images/image-11.jpeg";
 import imgIcon from "../assets/images/iconImage.png";
 
 const PhotoGallery = () => {
-  const images = [
-    img1,
-    img2,
-    img3,
-    img4,
-    img5,
-    img6,
-    img7,
-    img8,
-    img9,
-    img10,
-    img11,
-  ];
+  const [images, setImages] = useState([]);
+  useEffect(() => {
+    fetch("data/images.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setImages(data);
+      });
+  }, []);
 
   return (
     <div className="container bg-white border border-slate-300 rounded-xl drop-shadow mx-auto">
@@ -46,8 +30,8 @@ const PhotoGallery = () => {
         Gallery
       </div>
       <div className="grid grid-cols-5 gap-7 p-10">
-        {images.map((img, i) => (
-          <Photo key={i} index={i} img={img}></Photo>
+        {images.map((img) => (
+          <Photo key={img._id} _id={img._id} path={img.path}></Photo>
         ))}
         <div className="flex flex-col justify-center items-center bg-slate-50 border-2 border-slate-300 border-dashed rounded-lg">
           <img src={imgIcon} alt="" className="w-8 mb-4" />
@@ -59,3 +43,5 @@ const PhotoGallery = () => {
 };
 
 export default PhotoGallery;
+
+//process.env.PUBLIC_URL + img.path
