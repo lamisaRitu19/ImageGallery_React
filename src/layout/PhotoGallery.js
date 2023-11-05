@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Photo from "../components/Photo";
 import imgIcon from "../assets/images/iconImage.png";
 import { PhotoContext } from "../context/PhotoProvider";
@@ -28,6 +28,16 @@ const PhotoGallery = () => {
       imgNode.childNodes[0].classList.remove("imgOpacity");
       imgNode.childNodes[1].classList.remove("inputOpacity");
     });
+  };
+
+  const dragPhoto = useRef(0);
+  const draggedOverPhoto = useRef(0);
+  const handleSort = () => {
+    const imagesClone = [...images];
+    const temp = imagesClone[dragPhoto.current];
+    imagesClone[dragPhoto.current] = imagesClone[draggedOverPhoto.current];
+    imagesClone[draggedOverPhoto.current] = temp;
+    setImages(imagesClone);
   };
 
   return (
@@ -62,11 +72,15 @@ const PhotoGallery = () => {
         {images.map((img, i) => (
           <Photo
             key={i}
+            _id={img._id}
+            path={img.path}
             ref={(node) => {
               imageContainerRef.current[img._id] = node;
             }}
-            _id={img._id}
-            path={img.path}
+            index={i}
+            dragPhoto={dragPhoto}
+            draggedOverPhoto={draggedOverPhoto}
+            handleSort={handleSort}
           ></Photo>
         ))}
         <div className="flex flex-col justify-center items-center bg-slate-50 border-2 border-slate-300 border-dashed rounded-lg">

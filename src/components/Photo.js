@@ -2,7 +2,10 @@ import React, { useContext, useRef } from "react";
 import "./Photo.css";
 import { PhotoContext } from "../context/PhotoProvider";
 
-const Photo = ({ _id, path }, ref) => {
+const Photo = (
+  { _id, path, index, dragPhoto, draggedOverPhoto, handleSort },
+  ref
+) => {
   const { deleteImageList, setDeleteImageList } = useContext(PhotoContext);
   const inputRef = useRef(null);
 
@@ -18,7 +21,6 @@ const Photo = ({ _id, path }, ref) => {
 
       const delImages = [...deleteImageList, imgContainerId];
       setDeleteImageList(delImages);
-      console.log(delImages);
     } else {
       inputRef.current.parentNode.previousElementSibling.classList.remove(
         "imgOpacity"
@@ -27,15 +29,19 @@ const Photo = ({ _id, path }, ref) => {
 
       const delImages = deleteImageList.filter((img) => img !== imgContainerId);
       setDeleteImageList(delImages);
-      console.log(delImages);
     }
   };
 
-  return _id === "img1" ? (
+  return index === 0 ? (
     <div
       id={_id}
       ref={ref}
       className="row-span-2 col-span-2 border-2 border-slate-300 rounded-lg relative image-container"
+      draggable
+      onDragStart={() => (dragPhoto.current = index)}
+      onDragEnter={() => (draggedOverPhoto.current = index)}
+      onDragEnd={handleSort}
+      onDragOver={(e) => e.preventDefault()}
     >
       <img src={path} alt="" className="rounded-lg image" />
       <div className="input-container">
@@ -54,6 +60,11 @@ const Photo = ({ _id, path }, ref) => {
       id={_id}
       ref={ref}
       className="border-2 border-slate-300 rounded-lg relative image-container"
+      draggable
+      onDragStart={() => (dragPhoto.current = index)}
+      onDragEnter={() => (draggedOverPhoto.current = index)}
+      onDragEnd={handleSort}
+      onDragOver={(e) => e.preventDefault()}
     >
       <img src={path} alt="" className="rounded-lg image" />
       <div className="input-container">

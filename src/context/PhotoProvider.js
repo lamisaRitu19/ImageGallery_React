@@ -7,9 +7,6 @@ const PhotoProvider = ({ children }) => {
   const imageContainerRef = useRef({});
 
   const handleDelete = () => {
-    console.log("delete");
-    console.log(imageContainerRef);
-
     deleteImageList.forEach((img) => {
       imageContainerRef.current[img].style.display = "none";
     });
