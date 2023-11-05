@@ -22,7 +22,12 @@ const PhotoGallery = () => {
 
   const handleClearList = () => {
     setDeleteImageList([]);
-    // inputRef.current.checked = false;
+
+    Object.values(imageContainerRef.current).forEach((imgNode) => {
+      imgNode.childNodes[1].childNodes[0].checked = false;
+      imgNode.childNodes[0].classList.remove("imgOpacity");
+      imgNode.childNodes[1].classList.remove("inputOpacity");
+    });
   };
 
   return (
