@@ -10,6 +10,7 @@ const PhotoGallery = () => {
     imageContainerRef,
     handleDelete,
   } = useContext(PhotoContext);
+
   const [images, setImages] = useState([]);
   useEffect(() => {
     fetch("data/images.json")
@@ -19,6 +20,11 @@ const PhotoGallery = () => {
       });
   }, []);
 
+  const handleClearList = () => {
+    setDeleteImageList([]);
+    // inputRef.current.checked = false;
+  };
+
   return (
     <div className="container bg-white border border-slate-300 rounded-xl drop-shadow mx-auto">
       {deleteImageList.length > 0 ? (
@@ -27,6 +33,7 @@ const PhotoGallery = () => {
             <input
               type="checkbox"
               defaultChecked
+              onChange={handleClearList}
               name=""
               id=""
               className="w-5 h-5 mr-4"
@@ -50,7 +57,9 @@ const PhotoGallery = () => {
         {images.map((img, i) => (
           <Photo
             key={i}
-            ref={imageContainerRef.current[i]}
+            ref={(node) => {
+              imageContainerRef.current[img._id] = node;
+            }}
             _id={img._id}
             path={img.path}
           ></Photo>

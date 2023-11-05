@@ -4,13 +4,16 @@ export const PhotoContext = createContext();
 
 const PhotoProvider = ({ children }) => {
   const [deleteImageList, setDeleteImageList] = useState([]);
-  const imageContainerRef = useRef([]);
-  //   imageContainerRef.current = [];
+  const imageContainerRef = useRef({});
 
   const handleDelete = () => {
     console.log("delete");
     console.log(imageContainerRef);
-    // myRefs.current = things.map((element, i) => myRefs.current[i] ?? createRef());
+
+    deleteImageList.forEach((img) => {
+      imageContainerRef.current[img].style.display = "none";
+    });
+    setDeleteImageList([]);
   };
 
   const photoInfo = {
