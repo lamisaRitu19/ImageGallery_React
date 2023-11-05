@@ -12,6 +12,10 @@ const PhotoGallery = () => {
   } = useContext(PhotoContext);
 
   const [images, setImages] = useState([]);
+  const dragPhoto = useRef(0);
+  const draggedOverPhoto = useRef(0);
+
+  // images details are fetched from json file
   useEffect(() => {
     fetch("data/images.json")
       .then((res) => res.json())
@@ -20,9 +24,11 @@ const PhotoGallery = () => {
       });
   }, []);
 
+  // function triggered when all the image files are unchecked together
   const handleClearList = () => {
     setDeleteImageList([]);
 
+    // the checked images are unchecked and getting styles removed one by one
     Object.values(imageContainerRef.current).forEach((imgNode) => {
       imgNode.childNodes[1].childNodes[0].checked = false;
       imgNode.childNodes[0].classList.remove("imgOpacity");
@@ -30,8 +36,7 @@ const PhotoGallery = () => {
     });
   };
 
-  const dragPhoto = useRef(0);
-  const draggedOverPhoto = useRef(0);
+  // function triggered when all the image files are dragged for sorting
   const handleSort = () => {
     const imagesClone = [...images];
     const temp = imagesClone[dragPhoto.current];
@@ -43,8 +48,8 @@ const PhotoGallery = () => {
   return (
     <div className="container bg-white border border-slate-300 rounded-xl drop-shadow mx-auto">
       {deleteImageList.length > 0 ? (
-        <div className="flex justify-between items-center border-b-2 border-slate-300 drop-shadow-sm px-8 py-6">
-          <span className="text-2xl font-bold">
+        <div className="sm:flex justify-between items-center border-b-2 border-slate-300 drop-shadow-sm px-8 py-3 sm:py-6">
+          <p className="text-2xl font-bold mb-2 sm-mb-0">
             <input
               type="checkbox"
               defaultChecked
@@ -54,7 +59,7 @@ const PhotoGallery = () => {
               className="w-5 h-5 mr-4"
             />
             <span>{deleteImageList.length} File Selected</span>
-          </span>
+          </p>
           <button
             onClick={handleDelete}
             className="text-red-700 text-xl font-semibold"
@@ -68,7 +73,7 @@ const PhotoGallery = () => {
         </div>
       )}
 
-      <div className="grid grid-cols-5 gap-7 p-10">
+      <div className="sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-7 px-10 py-6 md:py-10">
         {images.map((img, i) => (
           <Photo
             key={i}
@@ -83,9 +88,11 @@ const PhotoGallery = () => {
             handleSort={handleSort}
           ></Photo>
         ))}
-        <div className="flex flex-col justify-center items-center bg-slate-50 border-2 border-slate-300 border-dashed rounded-lg">
+        <div className="flex flex-col justify-center items-center bg-slate-50 border-2 border-slate-300 border-dashed rounded-lg py-28 lg:py-0 2xl:py-20 add-image">
           <img src={imgIcon} alt="" className="w-8 mb-4" />
-          <p className="text-xl font-medium">Add Images</p>
+          <p className="text-xl md:text-lg xl:text-xl font-medium">
+            Add Images
+          </p>
         </div>
       </div>
     </div>

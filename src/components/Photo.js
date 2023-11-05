@@ -9,6 +9,7 @@ const Photo = (
   const { deleteImageList, setDeleteImageList } = useContext(PhotoContext);
   const inputRef = useRef(null);
 
+  // function triggered when any image is checked/unchecked
   const checkImage = () => {
     const checkboxChecked = inputRef.current.checked;
     const imgContainerId = inputRef.current.parentNode.parentNode.id;
@@ -19,6 +20,7 @@ const Photo = (
       );
       inputRef.current.parentNode.classList.add("inputOpacity");
 
+      // checked image is added in the deleteImages list
       const delImages = [...deleteImageList, imgContainerId];
       setDeleteImageList(delImages);
     } else {
@@ -27,6 +29,7 @@ const Photo = (
       );
       inputRef.current.parentNode.classList.remove("inputOpacity");
 
+      // unchecked image is deducted from the deleteImages list
       const delImages = deleteImageList.filter((img) => img !== imgContainerId);
       setDeleteImageList(delImages);
     }
@@ -36,7 +39,7 @@ const Photo = (
     <div
       id={_id}
       ref={ref}
-      className="row-span-2 col-span-2 border-2 border-slate-300 rounded-lg relative image-container"
+      className="row-span-2 col-span-2 border-2 border-slate-300 rounded-lg relative image-container mb-3 sm:mb-0"
       draggable
       onDragStart={() => (dragPhoto.current = index)}
       onDragEnter={() => (draggedOverPhoto.current = index)}
@@ -59,7 +62,7 @@ const Photo = (
     <div
       id={_id}
       ref={ref}
-      className="border-2 border-slate-300 rounded-lg relative image-container"
+      className="border-2 border-slate-300 rounded-lg relative image-container mb-3 sm:mb-0"
       draggable
       onDragStart={() => (dragPhoto.current = index)}
       onDragEnter={() => (draggedOverPhoto.current = index)}

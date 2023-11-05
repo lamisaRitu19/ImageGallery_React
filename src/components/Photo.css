@@ -15,6 +15,12 @@
 #check{
     cursor: pointer;
 }
+.imgOpacity{
+    opacity: 0.5;
+}
+.inputOpacity {
+    opacity: 1;
+}
 
 .image-container:hover {
     background-color: rgb(113 113 122);
@@ -25,10 +31,9 @@
 .image-container:hover .input-container {
     opacity: 1;
 }
-
-.imgOpacity{
-    opacity: 0.5;
-}
-.inputOpacity {
-    opacity: 1;
+.add-image:hover {
+    background-color: rgb(113 113 122);
+    transition: .5s ease;
+    opacity: 0.3;
+    cursor: pointer;
 }
