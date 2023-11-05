@@ -46,7 +46,7 @@ const Photo = (
       onDragEnd={handleSort}
       onDragOver={(e) => e.preventDefault()}
     >
-      <img src={path} alt="" className="rounded-lg image" />
+      <img src={path} alt="img" className="rounded-lg image" />
       <div className="input-container">
         <input
           ref={inputRef}
@@ -69,7 +69,7 @@ const Photo = (
       onDragEnd={handleSort}
       onDragOver={(e) => e.preventDefault()}
     >
-      <img src={path} alt="" className="rounded-lg image" />
+      <img src={path} alt="img" className="rounded-lg image" />
       <div className="input-container">
         <input
           ref={inputRef}

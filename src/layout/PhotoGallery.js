@@ -12,6 +12,7 @@ const PhotoGallery = () => {
   } = useContext(PhotoContext);
 
   const [images, setImages] = useState([]);
+  const [file, setFile] = useState();
   const dragPhoto = useRef(0);
   const draggedOverPhoto = useRef(0);
 
@@ -44,6 +45,11 @@ const PhotoGallery = () => {
     imagesClone[draggedOverPhoto.current] = temp;
     setImages(imagesClone);
   };
+
+  // function triggered when upload file button is clicked
+  function handleChange(e) {
+    setFile(URL.createObjectURL(e.target.files[0]));
+  }
 
   return (
     <div className="container bg-white border border-slate-300 rounded-xl drop-shadow mx-auto">
@@ -88,12 +94,20 @@ const PhotoGallery = () => {
             handleSort={handleSort}
           ></Photo>
         ))}
-        <div className="flex flex-col justify-center items-center bg-slate-50 border-2 border-slate-300 border-dashed rounded-lg py-28 lg:py-0 2xl:py-20 add-image">
+
+        {file && (
+          <div className="border-2 border-slate-300 rounded-lg relative image-container mb-3 sm:mb-0">
+            <img src={file} alt="img" className="rounded-lg image" />
+          </div>
+        )}
+
+        <label className="flex flex-col justify-center items-center bg-slate-50 border-2 border-slate-300 border-dashed rounded-lg py-28 lg:py-0 2xl:py-20 add-image">
           <img src={imgIcon} alt="" className="w-8 mb-4" />
           <p className="text-xl md:text-lg xl:text-xl font-medium">
             Add Images
           </p>
-        </div>
+          <input type="file" onChange={handleChange} hidden />
+        </label>
       </div>
     </div>
   );

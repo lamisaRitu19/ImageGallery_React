@@ -1,5 +1,12 @@
 # ImageGallery_React
 
+The project is a simple image gallery where the user can
+
+- View different images
+- Sort images by drag and drop
+- Delete one or multiple images at the same time
+- Add images
+
 ## Live link of the project is [ImageGallery](http://localhost:3000/)
 
 To get you started you can simply clone the repository:
