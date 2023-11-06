@@ -3,7 +3,16 @@ import "./Photo.css";
 import { PhotoContext } from "../context/PhotoProvider";
 
 const Photo = (
-  { _id, path, index, dragPhoto, draggedOverPhoto, handleSort },
+  {
+    _id,
+    path,
+    index,
+    dragPhoto,
+    draggedOverPhoto,
+    handleStartDrag,
+    handleEnterDrag,
+    handleSort,
+  },
   ref
 ) => {
   const { deleteImageList, setDeleteImageList } = useContext(PhotoContext);
@@ -41,8 +50,8 @@ const Photo = (
       ref={ref}
       className="row-span-2 col-span-2 border-2 border-slate-300 rounded-lg relative image-container mb-3 sm:mb-0"
       draggable
-      onDragStart={() => (dragPhoto.current = index)}
-      onDragEnter={() => (draggedOverPhoto.current = index)}
+      onDragStart={() => handleStartDrag(index)}
+      onDragEnter={() => handleEnterDrag(index)}
       onDragEnd={handleSort}
       onDragOver={(e) => e.preventDefault()}
     >
@@ -64,8 +73,8 @@ const Photo = (
       ref={ref}
       className="border-2 border-slate-300 rounded-lg relative image-container mb-3 sm:mb-0"
       draggable
-      onDragStart={() => (dragPhoto.current = index)}
-      onDragEnter={() => (draggedOverPhoto.current = index)}
+      onDragStart={() => handleStartDrag(index)}
+      onDragEnter={() => handleEnterDrag(index)}
       onDragEnd={handleSort}
       onDragOver={(e) => e.preventDefault()}
     >

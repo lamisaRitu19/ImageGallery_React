@@ -7,7 +7,7 @@ The project is a simple image gallery where the user can
 - Delete one or multiple images at the same time
 - Add images
 
-## Live link of the project is [ImageGallery](http://localhost:3000/)
+## Live link of the project is [ImageGallery](https://image-gallery-react-lami19.netlify.app/)
 
 To get you started you can simply clone the repository:
 
@@ -31,5 +31,4 @@ npm start
 
 - [Create React App](https://create-react-app.dev/)
 - [Tailwind](https://tailwindcss.com/)
-- [Firebase](https://firebase.google.com/)
 - [Sweetalert2](https://sweetalert2.github.io/)

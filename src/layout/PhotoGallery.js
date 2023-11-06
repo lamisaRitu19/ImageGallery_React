@@ -37,13 +37,38 @@ const PhotoGallery = () => {
     });
   };
 
-  // function triggered when all the image files are dragged for sorting
+  // function triggered when the image file is start to drag
+  const handleStartDrag = (index) => {
+    dragPhoto.current = index;
+    imageContainerRef.current[
+      `img${index + 1}`
+    ].childNodes[0].style.opacity = 0;
+    imageContainerRef.current[
+      `img${index + 1}`
+    ].childNodes[1].childNodes[0].style.opacity = 0.5;
+    imageContainerRef.current[`img${index + 1}`].style.opacity = 0.5;
+  };
+
+  // function triggered when the image file enters the div to drop
+  const handleEnterDrag = (index) => {
+    draggedOverPhoto.current = index;
+  };
+
+  // function triggered when the image file is dropped
   const handleSort = () => {
     const imagesClone = [...images];
     const temp = imagesClone[dragPhoto.current];
-    imagesClone[dragPhoto.current] = imagesClone[draggedOverPhoto.current];
-    imagesClone[draggedOverPhoto.current] = temp;
+    imagesClone.splice(dragPhoto.current, 1);
+    imagesClone.splice(draggedOverPhoto.current, 0, temp);
     setImages(imagesClone);
+
+    imageContainerRef.current[
+      `img${dragPhoto.current + 1}`
+    ].childNodes[0].style.opacity = 1;
+    imageContainerRef.current[
+      `img${dragPhoto.current + 1}`
+    ].childNodes[1].childNodes[0].style.opacity = 0;
+    imageContainerRef.current[`img${dragPhoto.current + 1}`].style.opacity = 1;
   };
 
   // function triggered when upload file button is clicked
@@ -91,6 +116,8 @@ const PhotoGallery = () => {
             index={i}
             dragPhoto={dragPhoto}
             draggedOverPhoto={draggedOverPhoto}
+            handleStartDrag={handleStartDrag}
+            handleEnterDrag={handleEnterDrag}
             handleSort={handleSort}
           ></Photo>
         ))}
