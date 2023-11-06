@@ -53,7 +53,7 @@ const Photo = (
           type="checkbox"
           name=""
           id="check"
-          className="w-5 h-5"
+          className="w-8 h-8"
           onClick={checkImage}
         />
       </div>
@@ -76,7 +76,7 @@ const Photo = (
           type="checkbox"
           name=""
           id="check"
-          className="w-5 h-5"
+          className="w-6 h-6"
           onChange={checkImage}
         />
       </div>

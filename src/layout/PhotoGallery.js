@@ -68,7 +68,7 @@ const PhotoGallery = () => {
           </p>
           <button
             onClick={handleDelete}
-            className="text-red-700 text-xl font-semibold"
+            className="text-red-700 text-xl font-semibold hover:underline"
           >
             Delete Files
           </button>

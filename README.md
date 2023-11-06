@@ -31,4 +31,5 @@ npm start
 
 - [Create React App](https://create-react-app.dev/)
 - [Tailwind](https://tailwindcss.com/)
+- [Firebase](https://firebase.google.com/)
 - [Sweetalert2](https://sweetalert2.github.io/)
