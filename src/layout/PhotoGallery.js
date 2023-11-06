@@ -40,13 +40,15 @@ const PhotoGallery = () => {
   // function triggered when the image file is start to drag
   const handleStartDrag = (index) => {
     dragPhoto.current = index;
-    imageContainerRef.current[
+
+    // tried but not getting the proper result
+    /*imageContainerRef.current[
       `img${index + 1}`
     ].childNodes[0].style.opacity = 0;
     imageContainerRef.current[
       `img${index + 1}`
     ].childNodes[1].childNodes[0].style.opacity = 0.5;
-    imageContainerRef.current[`img${index + 1}`].style.opacity = 0.5;
+    imageContainerRef.current[`img${index + 1}`].style.opacity = 0.5;*/
   };
 
   // function triggered when the image file enters the div to drop
@@ -62,13 +64,14 @@ const PhotoGallery = () => {
     imagesClone.splice(draggedOverPhoto.current, 0, temp);
     setImages(imagesClone);
 
-    imageContainerRef.current[
+    // tried but not getting the proper result
+    /*imageContainerRef.current[
       `img${dragPhoto.current + 1}`
     ].childNodes[0].style.opacity = 1;
     imageContainerRef.current[
       `img${dragPhoto.current + 1}`
     ].childNodes[1].childNodes[0].style.opacity = 0;
-    imageContainerRef.current[`img${dragPhoto.current + 1}`].style.opacity = 1;
+    imageContainerRef.current[`img${dragPhoto.current + 1}`].style.opacity = 1;*/
   };
 
   // function triggered when upload file button is clicked
